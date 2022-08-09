@@ -2,3 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+  @apply tw-font-display tw-text-base tw-text-black;
+}
