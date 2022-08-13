@@ -4,6 +4,54 @@
 @tailwind utilities;
 
 
-body {
-  @apply tw-font-display tw-text-base tw-text-black;
+@layer base {
+  body {
+    @apply tw-font-display tw-text-base tw-text-black;
+  }
+
+  input {
+    outline: none;
+  }
+}
+
+
+
+@layer components {
+  .wrapper {
+    @apply tw-px-4;
+  }
+
+  .page-py {
+    @apply tw-pb-4;
+  }
+
+  .card-primary {
+    @apply tw-rounded-3xl tw-bg-white;
+  }
+
+  .card-primary__title {
+    color: #515151;
+    @apply tw-text-sm;
+  }
+
+  .card-secondary {
+    background: #F5F5FA;
+    @apply tw-rounded-xl;
+  }
+
+  .link {
+    @apply tw-text-primary tw-text-sm;
+  }
+
+  .guest {
+    @apply tw-text-center tw-text-black;
+  }
+
+  .guest__title {
+    @apply tw-text-2xl tw-font-bold;
+  }
+
+  .guest__subtitle {
+    @apply tw-text-base;
+  }
 }

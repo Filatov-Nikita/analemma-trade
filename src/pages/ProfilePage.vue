@@ -1,0 +1,53 @@
+<template>
+  <q-page class="tw-pb-14">
+    <div class="wrapper">
+      <Toolbar />
+
+      <CardUser class="tw-mb-4" />
+
+      <div class="tw-text-center tw-mb-9">
+        <router-link class="link" :to="{ name: 'profile.show' }">Редактировать профиль</router-link>
+      </div>
+
+      <MenuList class="tw-mb-4">
+        <MenuListItem label="Мои заказы" icon="cart" to="/" />
+        <MenuListItem label="Push уведомления" icon="alert" :to="{ name: 'push.settings' }" />
+        <MenuListItem custom label="Выход" icon="logout" @click="logout" />
+      </MenuList>
+
+      <MenuList class="tw-mb-4">
+        <MenuListItem label="Наши адреса" icon="geo" to="/" />
+      </MenuList>
+
+      <CardHotline />
+    </div>
+    <VersionApp class="tw-absolute tw-inset-x-0 tw-px-4 tw-bottom-4" />
+  </q-page>
+</template>
+
+<script>
+import VersionApp from 'components/VersionApp.vue';
+import MenuList from 'components/MenuList.vue';
+import MenuListItem from 'components/MenuListItem.vue';
+import CardHotline from 'components/CardHotline.vue';
+import CardUser from 'components/CardUser.vue';
+
+export default {
+  methods: {
+    logout() {
+      console.log('logout');
+    }
+  },
+  components: {
+    VersionApp,
+    MenuList,
+    MenuListItem,
+    CardHotline,
+    CardUser
+  }
+}
+</script>
+
+<style>
+
+</style>
