@@ -9,7 +9,7 @@
       <q-space />
       <QuotePrice value="1,795$" diff="-12,50" diffPerc="-0,69%" />
     </div>
-    <div class="card-secondary tw-px-5 tw-py-4 tw-flex tw-mb-3">
+    <div class="card-secondary tw-px-5 tw-py-4 tw-flex">
       <QuoteLabel class="tw-mr-2" label="Серебро 999" time="14:14:45" />
       <q-space />
       <QuotePrice value="1,795$" diff="-12,50" diffPerc="-0,69%" />

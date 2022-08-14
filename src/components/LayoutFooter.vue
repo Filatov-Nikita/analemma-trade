@@ -32,7 +32,7 @@ const navLinks = [
   },
   {
     icon: 'products',
-    to: '/1',
+    to: '/products',
     label: 'Слитки'
   },
   {

@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <button class="tw-absolute tw-right-3 tw-top-5">
+    <button class="tw-absolute tw-right-3 tw-top-5" @click="$router.back()">
       <svg class="tw-h-6 tw-w-6">
         <use xlink:href="/sprite.svg#close"></use>
       </svg>

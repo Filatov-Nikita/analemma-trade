@@ -6,9 +6,11 @@
 
     <q-space />
 
-    <router-link class="tw-mr-9" to="/">
+    <router-link to="/" class="tw-pl-9">
       <img class="tw-w-[136px]" src="~assets/images/logo.svg" alt="app logo">
     </router-link>
+
+    <q-space />
 
     <router-link class="tw-mr-3" :to="{ name: 'push.settings' }">
       <svg class="tw-w-5 tw-h-5 tw-fill-gray900"><use xlink:href="/sprite.svg#alert"></use></svg>

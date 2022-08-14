@@ -1,11 +1,7 @@
 <template>
   <component
     class="tw-bg-primary tw-w-full tw-text-center tw-font-light tw-text-white disabled:tw-bg-opacity-50 active:tw-opacity-80 btn"
-    :class="[
-      size === 'xl'
-        ? 'tw-py-6 tw-px-8 tw-text-sm tw-rounded-xl'
-        : 'tw-py-2.5 tw-px-4 tw-text-base tw-rounded'
-    ]"
+    :class="[ classes ]"
     :is="is"
   >
     <slot />
@@ -22,6 +18,15 @@ export default {
     size: {
       default: 'base',
       type: String
+    },
+  },
+  computed: {
+    classes() {
+      switch(this.size) {
+        case 'base--rounded': return 'tw-py-2.5 tw-px-4 tw-text-base tw-rounded-xl';
+        case 'xl': return 'tw-py-6 tw-px-8 tw-text-sm tw-rounded-xl';
+        default: return 'tw-py-2.5 tw-px-4 tw-text-base tw-rounded';
+      }
     }
   }
 }

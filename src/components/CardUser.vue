@@ -9,7 +9,7 @@
     </div>
 
     <div class="tw-text-center">
-      <router-link class="tw-text-[#2E2E2E] tw-text-2xl" to="/">Войти</router-link>
+      <router-link class="tw-text-[#2E2E2E] tw-text-2xl" :to="{ name: 'login' }">Войти</router-link>
     </div>
   </div>
 </template>

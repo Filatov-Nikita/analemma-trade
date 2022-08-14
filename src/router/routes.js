@@ -36,6 +36,20 @@ const routes = [
         component: () => import('src/pages/PushSettingsPage.vue'),
         meta: { bgColorClass: 'tw-bg-white' },
         name: 'push.settings'
+      },
+
+      {
+        path: '/products',
+        component: () => import('src/pages/ProductsPage.vue'),
+        meta: { bgColorClass: 'tw-bg-white' },
+        name: 'products'
+      },
+
+      {
+        path: '/products/:id',
+        component: () => import('src/pages/ProductsShowPage.vue'),
+        meta: { bgColorClass: 'tw-bg-white' },
+        name: 'products.show'
       }
     ]
   },
