@@ -34,7 +34,10 @@
       <ProductsOptions class="tw-mb-8" />
       <ProductPrice class="tw-mb-8" />
       <ProductPriceHistory />
-      <AppButton class="tw-mt-7" size="base--rounded">Купить</AppButton>
+      <AppButton class="tw-mt-7" size="base--rounded" @click="order">Купить</AppButton>
+
+      <DialogCart v-model:visible="modal" @next="modal2 = true" />
+      <DialogOrder v-model:visible="modal2" @close="modal2 = false"/>
     </div>
   </q-page>
 </template>
@@ -43,17 +46,29 @@
 import ProductsOptions from 'components/ProductsOptions.vue';
 import ProductPrice from 'components/ProductPrice.vue';
 import ProductPriceHistory from 'components/ProductPriceHistory.vue';
+import DialogCart from 'components/DialogCart.vue';
+import DialogOrder from 'components/DialogOrder.vue';
 
 export default {
   data() {
     return {
-      slide: '1'
+      slide: '1',
+      modal: false,
+      modal2: false,
+    }
+  },
+  methods: {
+    order() {
+      this.$store.dispatch('cart/add', { id: 1 });
+      this.modal = true;
     }
   },
   components: {
     ProductsOptions,
     ProductPrice,
-    ProductPriceHistory
+    ProductPriceHistory,
+    DialogCart,
+    DialogOrder
   }
 }
 </script>

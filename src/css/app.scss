@@ -36,7 +36,7 @@
 
   .card-secondary {
     background: #F5F5FA;
-    @apply tw-rounded-xl;
+    @apply tw-rounded-2xl;
   }
 
   .link {
@@ -54,4 +54,41 @@
   .guest__subtitle {
     @apply tw-text-base;
   }
+
+  .dialog-bottom .q-dialog__inner > div {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .slide-icon {
+    background: #DFDFDF;
+    width: 46px;
+    height: 3px;
+    border-radius: 40px;
+  }
+
+  .b-modal {
+    margin-bottom: 100px !important;
+    border-radius: 22px !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    box-shadow: theme('boxShadow.2xl') !important;
+  }
+
+  .b-modal.vier-sheet::after {
+    content: none !important;
+  }
+
+  .b-modal .vier-sheet-head {
+    padding-top: 24px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .b-modal .vier-sheet-body {
+    z-index: 10 !important;
+  }
+}
+
+i.vier-sheet-container {
+  z-index: 1990 !important;
 }

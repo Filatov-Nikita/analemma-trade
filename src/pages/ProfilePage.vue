@@ -16,12 +16,13 @@
       </MenuList>
 
       <MenuList class="tw-mb-4">
-        <MenuListItem label="Наши адреса" icon="geo" to="/" />
+        <MenuListItem label="Наши адреса" icon="geo" custom @click="showAddress"/>
       </MenuList>
 
       <CardHotline />
     </div>
     <VersionApp class="tw-absolute tw-inset-x-0 tw-px-4 tw-bottom-4" />
+    <DialogAddress v-model="address" />
   </q-page>
 </template>
 
@@ -31,11 +32,20 @@ import MenuList from 'components/MenuList.vue';
 import MenuListItem from 'components/MenuListItem.vue';
 import CardHotline from 'components/CardHotline.vue';
 import CardUser from 'components/CardUser.vue';
+import DialogAddress from 'components/DialogAddress.vue';
 
 export default {
+  data() {
+    return {
+      address: false
+    }
+  },
   methods: {
     logout() {
       console.log('logout');
+    },
+    showAddress() {
+      this.address = true
     }
   },
   components: {
@@ -43,7 +53,8 @@ export default {
     MenuList,
     MenuListItem,
     CardHotline,
-    CardUser
+    CardUser,
+    DialogAddress
   }
 }
 </script>

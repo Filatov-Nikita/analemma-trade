@@ -50,6 +50,13 @@ const routes = [
         component: () => import('src/pages/ProductsShowPage.vue'),
         meta: { bgColorClass: 'tw-bg-white' },
         name: 'products.show'
+      },
+      {
+        path: '/address/:id',
+        component: () => import('src/pages/AddressShowPage.vue'),
+        meta: { hiddenFooter: true },
+        name: 'address.show',
+        props: true,
       }
     ]
   },

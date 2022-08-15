@@ -3,7 +3,9 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <LayoutFooter />
+    <teleport to="body">
+      <LayoutFooter v-if="!hiddenFooter" />
+    </teleport>
   </q-layout>
 </template>
 
@@ -16,6 +18,9 @@ export default defineComponent({
   computed: {
     bgColor() {
       return this.$route.meta?.bgColorClass || 'tw-bg-gray800'
+    },
+    hiddenFooter() {
+      return this.$route.meta?.hiddenFooter === true
     }
   },
   components: {
