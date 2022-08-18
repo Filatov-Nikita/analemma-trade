@@ -4,18 +4,18 @@
 
       <div class="tw-relative" v-click-outside="close">
         <div
-          class="tw-rounded-[7px] tw-border tw-bg-white tw-px-3 tw-py-2"
+          class="tw-rounded-[7px] tw-border tw-bg-white tw-px-3 tw-py-2 tw-min-h-[48px] tw-flex tw-items-center"
           :class="[ errorMessage ? 'tw-border-negative' : 'tw-border-black' ]"
           @click="onClick"
         >
-          <div class="tw-flex tw-items-center">
+          <div class="tw-flex tw-items-center tw-grow">
             <div class="tw-mr-3">
               <p class="tw-text-sm tw-font-medium tw-mb-[2px]">{{ field.value ? labelGetter(field.value) : label }}</p>
               <p
-                v-if="caption"
+                v-if="field.value?.caption || caption"
                 class="tw-text-[#979797] tw-font-light tw-text-[10px] tw-leading-tight tw-tracking-tighter"
               >
-                {{ caption }}
+                {{ field.value?.caption || caption }}
               </p>
             </div>
             <q-space />
@@ -35,7 +35,7 @@
           <div
             v-for="(option, i) in options"
             :key="i"
-            class="tw-p-2 active:tw-bg-gray800 last:tw-rounded-b-[7px]"
+            class="tw-p-2 active:tw-bg-gray800 last:tw-rounded-b-[7px] tw-text-xs tw-text-dark"
             @click="onChange(handleChange, option)"
           >
             {{ labelGetter(option) }}

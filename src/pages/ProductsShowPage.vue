@@ -37,7 +37,12 @@
       <AppButton class="tw-mt-7" size="base--rounded" @click="order">Купить</AppButton>
 
       <DialogCart v-model:visible="modal" @next="modal2 = true" />
-      <DialogOrder v-model:visible="modal2" @close="modal2 = false"/>
+      <DialogOrder
+        v-model:visible="modal2"
+        @close="modal2 = false"
+        @success="onSuccess"
+      />
+      <DialogOrderSuccess ref="success" />
     </div>
   </q-page>
 </template>
@@ -48,8 +53,12 @@ import ProductPrice from 'components/ProductPrice.vue';
 import ProductPriceHistory from 'components/ProductPriceHistory.vue';
 import DialogCart from 'components/DialogCart.vue';
 import DialogOrder from 'components/DialogOrder.vue';
+import DialogOrderSuccess from 'components/DialogOrderSuccess.vue';
 
 export default {
+  mounted() {
+    window.success = this.onSuccess;
+  },
   data() {
     return {
       slide: '1',
@@ -61,6 +70,10 @@ export default {
     order() {
       this.$store.dispatch('cart/add', { id: 1 });
       this.modal = true;
+    },
+    onSuccess() {
+      this.modal = false
+      this.$refs.success.show();
     }
   },
   components: {
@@ -68,7 +81,8 @@ export default {
     ProductPrice,
     ProductPriceHistory,
     DialogCart,
-    DialogOrder
+    DialogOrder,
+    DialogOrderSuccess
   }
 }
 </script>

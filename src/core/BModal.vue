@@ -6,7 +6,7 @@
     v-slot="{ closeSelf }"
   >
     <button class="tw-absolute tw-top-3 tw-right-5" @click="closeSelf">
-      Закрыть
+      <slot name="close">Закрыть</slot>
     </button>
     <slot />
   </Sheet>

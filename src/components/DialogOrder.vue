@@ -18,7 +18,7 @@
         <p class="tw-font-bold tw-text-primary tw-text-xl tw-leading-none">0 ₽</p>
       </div>
 
-      <FormOrder>
+      <FormOrder @success="onSuccess">
         <template #total>
           <CardOrderTotal />
         </template>
@@ -33,16 +33,22 @@ import FormOrder from 'components/FormOrder.vue';
 import CardOrderTotal from 'components/CardOrderTotal.vue';
 
 export default {
-  emits: ['close'],
+  emits: ['close', 'success'],
   data() {
     return {
       btnClasses: 'tw-block tw-w-full tw-border tw-border-primary tw-font-light tw-text-base tw-rounded-[10px] tw-py-2 tw-px-4 active:tw-opacity-70'
     }
   },
+  methods: {
+    onSuccess(values) {
+      this.$emit('close');
+      this.$emit('success', values);
+    }
+  },
   components: {
     CartListItem,
     FormOrder,
-    CardOrderTotal
+    CardOrderTotal,
   }
 }
 </script>

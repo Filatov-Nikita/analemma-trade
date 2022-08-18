@@ -16,7 +16,7 @@
       :class="[
         errorMessage
         ? 'tw-bg-negative tw-bg-opacity-10 tw-border-negative'
-        : ''
+        : 'tw-bg-white tw-bg-opacity-0'
       ]"
       type="text"
       v-model="value"
