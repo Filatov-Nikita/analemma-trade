@@ -24,6 +24,8 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
+      'init',
+      'regist-yandex-map.js',
       'registr-components.js',
       'registr-validators'
     ],

@@ -92,3 +92,7 @@
 i.vier-sheet-container {
   z-index: 1990 !important;
 }
+
+[class*="ground-pane"] {
+  filter: grayscale(1);
+}

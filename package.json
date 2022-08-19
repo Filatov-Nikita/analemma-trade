@@ -20,6 +20,7 @@
     "vee-validate": "^4.6.4",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0",
+    "vue-yandex-maps": "^0.12.3",
     "vuex": "^4.0.1"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@
       class="card-secondary tw-px-5 tw-py-6 tw-items-center tw-flex tw-w-full active:tw-opacity-80 tw-border"
       :class="[ errorMessage ? 'tw-border-negative' : 'tw-border-[#F5F5FA]']"
     >
-      <span class="tw-mr-3 tw-text-sm">{{ point?.address || 'Выберите адрес '}}</span>
+      <span class="tw-mr-3 tw-text-sm">{{ point?.street || 'Выберите адрес '}}</span>
       <q-space />
       <span>
         <svg class="tw-fill-[#A8A7AF] tw-w-2 tw-h-2">
