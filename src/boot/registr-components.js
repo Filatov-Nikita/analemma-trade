@@ -14,6 +14,8 @@ export default ({ app }) => {
   app.component('TabsContentItem', require('src/components/TabsContentItem.vue').default);
   app.component('QuotePrice', require('src/components/QuotePrice.vue').default);
   app.component('QuoteLabel', require('src/components/QuoteLabel.vue').default);
+  app.component('ButtonHint', require('src/components/ButtonHint.vue').default);
+  app.component('DialogHint', require('src/components/DialogHint.vue').default);
   app.component('AppButton', require('src/core/AppButton.vue').default);
   app.component('AppInput', require('src/core/AppInput.vue').default);
   app.component('AppErrorMsg', require('src/core/AppErrorMsg.vue').default);

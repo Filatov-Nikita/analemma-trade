@@ -2,7 +2,14 @@
   <div class="tw-space-y-3">
     <div class="tw-flex">
       <div>
-        <p class="tw-mb-[2px]">Клубная цена:</p>
+        <div class="tw-flex">
+          <p class="tw-mb-[2px] tw-mr-1">Клубная цена:</p>
+          <ButtonHint v-slot="{ showed, onChange }">
+              <DialogHint :visible="showed" @update:visible="onChange">
+                <div v-html="$store.state.hints.weight"></div>
+              </DialogHint>
+            </ButtonHint>
+        </div>
         <p class="tw-text-xs tw-font-light tw-text-gray900">04.07.2022</p>
       </div>
       <q-space />

@@ -21,11 +21,11 @@
           <div class="tw-flex tw-items-center">
             <p class="tw-font-light tw-text-xs tw-mr-1">Клубная цена:</p>
             <p class="tw-font-bold tw-text-primary tw-mr-1">14 750₽</p>
-            <button>
-              <svg class="tw-w-5 tw-h-5">
-                <use xlink:href="/sprite.svg#help"></use>
-              </svg>
-            </button>
+            <ButtonHint class="tw-mr-2" v-slot="{ showed, onChange }">
+              <DialogHint :visible="showed" @update:visible="onChange">
+                <div v-html="$store.state.hints.weight"></div>
+              </DialogHint>
+            </ButtonHint>
           </div>
 
           <div class="tw-flex tw-items-center">
@@ -33,11 +33,23 @@
             <p>14 750₽</p>
           </div>
 
-          <div class="tw-flex tw-items-center">
-            <p class="tw-font-light tw-text-xs tw-mr-3">Кол-во:</p>
+          <div class="tw-flex tw-items-center" v-if="prices?.buyback">
+            <p class="tw-font-light tw-text-xs tw-mr-1">Цена выкупа:</p>
+            <p class="tw-font-bold tw-text-positive">{{ prices.buyback }}</p>
+          </div>
 
-            <div class="tw-flex tw-items-center tw-space-x-3">
-              <button :disabled="!canReduce" @click="$store.dispatch('cart/reduceItem', id)">
+          <div
+            class="tw-flex tw-items-center disabled:tw-opacity-50"
+            v-if="!hideActions"
+          >
+            <p class="tw-font-light tw-text-xs">Кол-во:</p>
+
+            <div class="tw-flex tw-items-center btns">
+              <button
+                class="tw-p-2"
+                :disabled="!canReduce || disabledActions"
+                @click="$store.dispatch('cart/reduceItem', id)"
+              >
                 <svg
                   class="tw-w-4 tw-h-4 tw-stroke-black"
                   :class="[ canReduce ? 'tw-stroke-black' : 'tw-stroke-gray900' ]">
@@ -45,13 +57,16 @@
                 </svg>
               </button>
               <span class=" tw-font-bold tw-text-lg">{{ count }}</span>
-              <button @click="$store.dispatch('cart/incItem', id)">
+              <button
+                class="tw-p-2"
+                :disabled="disabledActions"
+                @click="$store.dispatch('cart/incItem', id)"
+              >
                 <svg class="tw-w-4 tw-h-4 tw-stroke-black">
                   <use xlink:href="/sprite.svg#append"></use>
                 </svg>
               </button>
             </div>
-
           </div>
 
         </div>
@@ -59,6 +74,8 @@
       </div>
 
     </div>
+
+    <slot />
   </div>
 </template>
 
@@ -68,6 +85,15 @@ export default {
     id: {},
     count: {},
     cantRemove: {
+      default: false,
+      type: Boolean
+    },
+    hideActions: {
+      default: false,
+      type: Boolean
+    },
+    prices: {},
+    disabledActions: {
       default: false,
       type: Boolean
     }
@@ -80,6 +106,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .btns button:disabled {
+    opacity: 0.3 !important;
+  }
 </style>

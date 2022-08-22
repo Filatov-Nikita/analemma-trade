@@ -25,6 +25,14 @@
     @apply tw-pb-4;
   }
 
+  .safe-pt {
+    padding-top: max(env(safe-area-inset-top), 30px);
+  }
+
+  .safe-pb {
+    padding-bottom: max(env(safe-area-inset-bottom), 16px);
+  }
+
   .card-primary {
     @apply tw-rounded-3xl tw-bg-white;
   }
@@ -68,11 +76,15 @@
   }
 
   .b-modal {
-    margin-bottom: 100px !important;
+    margin-bottom: 120px !important;
     border-radius: 22px !important;
     margin-left: 16px !important;
     margin-right: 16px !important;
     box-shadow: theme('boxShadow.2xl') !important;
+  }
+
+  .b-modal--down {
+    margin-bottom: 60px !important;
   }
 
   .b-modal.vier-sheet::after {

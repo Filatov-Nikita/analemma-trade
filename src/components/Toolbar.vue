@@ -1,6 +1,6 @@
 <template>
-  <div class="tw-py-4 tw-flex tw-items-center">
-    <button @click="$router.back()">
+  <div class="safe-pt tw-flex tw-items-center">
+    <button class="tw-p-2" @click="$router.back()">
       <span>
         <svg class="tw-rotate-180 tw-w-4 tw-h-4">
           <use xlink:href="/sprite.svg#arrow-right"></use>

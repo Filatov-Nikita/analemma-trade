@@ -1,7 +1,7 @@
 <template>
   <Sheet
     class="b-modal"
-    max-height="82%"
+    max-height="80%"
     :slideIcon="slideIcon"
     v-slot="{ closeSelf }"
   >

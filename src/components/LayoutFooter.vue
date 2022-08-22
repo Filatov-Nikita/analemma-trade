@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="tw-bg-white tw-py-4 tw-px-6">
+  <q-footer class="tw-bg-white tw-pt-4 safe-pb tw-px-6">
     <nav class="tw-flex tw-justify-between -tw-mx-2">
       <router-link
         v-for="link in navLinks"

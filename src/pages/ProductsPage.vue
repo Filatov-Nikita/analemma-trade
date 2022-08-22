@@ -4,12 +4,12 @@
       <Toolbar title="Слитки" titleClass="tw-pl-9 tw-text-base tw-font-bold">
         <template #actions>
           <div class="tw-flex">
-            <button class="tw-mr-2">
-              <svg class="tw-w-5 tw-h-5">
-                <use xlink:href="/sprite.svg#help"></use>
-              </svg>
-            </button>
-            <button>
+            <ButtonHint class="tw-mr-2" v-slot="{ showed, onChange }">
+              <DialogHint :visible="showed" @update:visible="onChange">
+                <div v-html="$store.state.hints.weight"></div>
+              </DialogHint>
+            </ButtonHint>
+            <button @click="$store.commit('cart/toggle')">
               <svg class="tw-w-5 tw-h-5">
                 <use xlink:href="/sprite.svg#cart2"></use>
               </svg>
@@ -59,7 +59,7 @@ export default {
     };
   },
   components: {
-    ProductsList
+    ProductsList,
   }
 };
 </script>

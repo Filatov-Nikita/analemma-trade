@@ -1,6 +1,7 @@
 export default {
   namespaced: true,
   state: {
+    showed: false,
     items: null
   },
   getters: {
@@ -9,6 +10,9 @@ export default {
     },
     len(state) {
       return state.items ? Object.keys(state.items).length : 0;
+    },
+    showed(state) {
+      return state.showed;
     }
   },
   mutations: {
@@ -17,9 +21,19 @@ export default {
     },
     removeItem(state, itemId) {
       if(itemId in state.items) delete state.items[itemId];
+    },
+    toggle(state, value) {
+      if(typeof value === 'boolean') return state.showed = value;
+      return state.showed = !state.showed;
+    },
+    setItems(state, payload) {
+      state.items = payload;
     }
   },
   actions: {
+    clear({ commit }) {
+      commit('setItems', null);
+    },
     add({ commit }, item) {
       const cartItem = { ...item, count: 1 };
       commit('appendItem', cartItem);

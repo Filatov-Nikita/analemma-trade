@@ -10,7 +10,7 @@
       </div>
 
       <MenuList class="tw-mb-4">
-        <MenuListItem label="Мои заказы" icon="cart" to="/" />
+        <MenuListItem custom label="Мои заказы" icon="cart" @click="orders = true" />
         <MenuListItem label="Push уведомления" icon="alert" :to="{ name: 'push.settings' }" />
         <MenuListItem custom label="Выход" icon="logout" @click="logout" />
       </MenuList>
@@ -23,6 +23,7 @@
     </div>
     <VersionApp class="tw-absolute tw-inset-x-0 tw-px-4 tw-bottom-4" />
     <DialogAddress v-model="address" />
+    <DialgMyOrders v-model:visible="orders" />
   </q-page>
 </template>
 
@@ -33,11 +34,13 @@ import MenuListItem from 'components/MenuListItem.vue';
 import CardHotline from 'components/CardHotline.vue';
 import CardUser from 'components/CardUser.vue';
 import DialogAddress from 'components/DialogAddress.vue';
+import DialgMyOrders from 'components/DialgMyOrders.vue';
 
 export default {
   data() {
     return {
-      address: false
+      address: false,
+      orders: false
     }
   },
   methods: {
@@ -54,7 +57,8 @@ export default {
     MenuListItem,
     CardHotline,
     CardUser,
-    DialogAddress
+    DialogAddress,
+    DialgMyOrders
   }
 }
 </script>
