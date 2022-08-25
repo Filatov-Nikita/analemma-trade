@@ -46,6 +46,7 @@ export default {
   methods: {
     logout() {
       console.log('logout');
+      this.$router.replace({ name: 'login' })
     },
     showAddress() {
       this.address = true

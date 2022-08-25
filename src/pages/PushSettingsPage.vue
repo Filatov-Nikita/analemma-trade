@@ -3,7 +3,7 @@
     <div class="wrapper">
       <Toolbar title="Push уведомления">
         <template #actions>
-          <button @click="markRead">
+          <button @click="markRead" class="tw-p-2">
             <svg class="tw-w-4 tw-h-4">
               <use xlink:href="/sprite.svg#check-all"></use>
             </svg>

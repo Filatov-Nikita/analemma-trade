@@ -10,7 +10,7 @@
           <QuoteList :items="[ { label: 'Золото 999', time: '14:14:45', value: '1,795', diff: '-12,50', diffPerc: '-0,69%' } ]"/>
         </TabsContentItem>
         <TabsContentItem name="money">
-          <QuoteList :items="[ { label: '1', time: '2', value: '3', diff: '4', diffPerc: '5' } ]"/>
+          <QuoteList :items="[ { label: 'Доллар', time: '14:14:45', value: '1,795', diff: '-12,50', diffPerc: '-0,69%' } ]"/>
         </TabsContentItem>
       </TabsContent>
     </div>

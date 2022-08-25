@@ -8,6 +8,7 @@
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-navigation href="https://*.tradingview.com/*" />
     <platform name="ios">
         <preference name="ScrollEnabled" value="true" />
         <preference name="DisallowOverscroll" value="true" />

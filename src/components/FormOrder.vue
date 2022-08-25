@@ -5,7 +5,7 @@
       <div class="tw-space-y-2">
         <AppInput name="name" label="Имя*" rules="required" />
         <AppInput name="surname" label="Фамилия*" rules="required" />
-        <AppInput name="cellphone" label="Номер телефона*" rules="required" />
+        <AppInput cellphone name="cellphone" label="Номер телефона*" rules="required" />
         <AppInput name="email" label="e-mail*" rules="required|email" />
       </div>
     </section>

@@ -6,7 +6,7 @@
       <CardQuote />
       <div>
         <TitleGold999 class="tw-mb-4" />
-        <img src="~assets/images/graph.jpg" alt="" />
+        <ChartGold />
       </div>
     </div>
   </q-page>
@@ -18,6 +18,7 @@ import ToolbarHome from 'components/ToolbarHome.vue';
 import TitleGold999 from 'components/TitleGold999.vue';
 import CardQuote from 'components/CardQuote.vue';
 import CardProducs from 'components/CardProducs.vue';
+import ChartGold from 'components/ChartGold.vue';
 
 export default defineComponent({
   name: 'MainPage',
@@ -26,6 +27,7 @@ export default defineComponent({
     CardQuote,
     CardProducs,
     TitleGold999,
+    ChartGold
   },
 });
 </script>

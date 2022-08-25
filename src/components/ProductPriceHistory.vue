@@ -3,8 +3,9 @@
     <p class="tw-text-center tw-font-light tw-mb-2">История цены</p>
     <div class="tw-text-center">
       <button
-        class="tw-inline-block"
-        :class="{ 'tw-opacity-0': show }"
+        :disabled="show"
+        class="tw-inline-block tw-p-2"
+        :class="{ 'tw-invisible': show }"
         @click="onClick"
       >
         <svg class="tw-fill-primary tw-w-4 tw-h-4 tw-rotate-90">
@@ -14,13 +15,11 @@
     </div>
 
     <template v-if="show">
-      <div>
-        <img class="tw-w-full" src="/price.png" alt="" />
-      </div>
+     <ChartLine ref="chart" />
 
       <div class="tw-text-center">
         <button
-          class="tw-inline-block"
+          class="tw-inline-block tw-p-2"
           @click="onClick"
         >
           <svg class="tw-fill-primary tw-w-4 tw-h-4 -tw-rotate-90">
@@ -33,6 +32,9 @@
 </template>
 
 <script>
+import ChartLine from './ChartLine.vue';
+import { nextTick } from 'vue';
+
 export default {
   data() {
     return {
@@ -42,8 +44,17 @@ export default {
   methods: {
     onClick() {
       this.show = !this.show;
+
+      if(this.show) {
+        nextTick(() => {
+          this.$refs.chart.$el.scrollIntoView({ behavior: 'smooth' });
+        })
+      }
     },
   },
+  components: {
+    ChartLine
+  }
 };
 </script>
 

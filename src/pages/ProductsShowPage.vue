@@ -24,10 +24,10 @@
         height="360px"
       >
         <CarouselSlide class="tw-p-0" name="1">
-          <q-img src="/gold.png" class="tw-w-full" height="320px"/>
+          <q-img src="/gold2.png" class="tw-w-full" height="320px"/>
         </CarouselSlide>
         <CarouselSlide name="2">
-          <q-img src="/gold2.png" class="tw-w-full" height="320px"/>
+          <q-img src="/gold.png" class="tw-w-full" height="320px"/>
         </CarouselSlide>
       </Carousel>
 
