@@ -1,6 +1,6 @@
 <template>
-  <q-footer class="tw-bg-white tw-pt-4 safe-pb tw-px-6">
-    <nav class="tw-flex tw-justify-between -tw-mx-2">
+  <q-footer class="tw-bg-white tw-pt-4 tw-px-6">
+    <nav class="tw-flex tw-justify-between -tw-mx-2 safe-pb">
       <router-link
         v-for="link in navLinks"
         :key="link.label"
@@ -50,9 +50,10 @@ const navLinks = [
 export default {
   data() {
     return {
-      navLinks
+      navLinks,
+
     }
-  }
+  },
 }
 </script>
 

@@ -3,9 +3,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <teleport to="body">
-      <LayoutFooter v-if="!hiddenFooter" />
-    </teleport>
+    <LayoutFooter v-if="!hiddenFooter" />
   </q-layout>
 </template>
 

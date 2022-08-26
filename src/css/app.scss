@@ -26,11 +26,11 @@
   }
 
   .safe-pt {
-    padding-top: max(env(safe-area-inset-top), 30px);
+    padding-top: max(env(safe-area-inset-top, 16px), 30px);
   }
 
   .safe-pb {
-    padding-bottom: max(env(safe-area-inset-bottom), 16px);
+    padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
   }
 
   .card-primary {
