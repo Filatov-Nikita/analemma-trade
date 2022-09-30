@@ -10,6 +10,7 @@
     <allow-intent href="https://*/*" />
     <allow-navigation href="https://*.tradingview.com/*" />
     <platform name="ios">
+        <resource-file src="GoogleService-Info.plist" />
         <preference name="ScrollEnabled" value="true" />
         <preference name="DisallowOverscroll" value="true" />
         <icon height="57" src="res/ios/icon.png" width="57" />
@@ -49,6 +50,7 @@
     <allow-navigation href="about:*" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <platform name="android">
+        <resource-file src="google-services.json" target="app/google-services.json" />
         <icon density="ldpi" src="res/android/ldpi.png" />
         <icon density="mdpi" src="res/android/mdpi.png" />
         <icon density="hdpi" src="res/android/hdpi.png" />
