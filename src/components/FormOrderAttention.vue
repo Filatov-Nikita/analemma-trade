@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="deliveryType?.value === '1'"
+    v-if="deliveryType?.value === '2'"
     class="tw-flex tw-items-center tw-mt-3"
   >
     <span class="tw-mr-3">
@@ -13,7 +13,7 @@
     </span>
   </div>
   <p
-    v-else-if="deliveryType?.value === '2'"
+    v-else-if="deliveryType?.value === '3'"
     class="
       tw-text-center
       tw-font-light

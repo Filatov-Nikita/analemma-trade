@@ -1,6 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
-
+import { jsonToBody, cleanPhone, profitFormat } from './helpers';
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation;
@@ -12,26 +12,52 @@ import { createStore } from 'vuex'
 
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
-    state: {
-      address: {
-        1: {
-          name: 'г. Москва, ул. Краснодарская, д.48',
-          coords: [55.676550, 37.761177]
-        },
-        2: {
-          name: 'г. Санкт-Петербург, пр-кт Каменноостровский, д. 40А, пом. 9-Н',
-          coords: [59.966111, 30.309867]
+    getters: {
+      extractPriceTypes(_state, getters) {
+        return (item) => {
+          return {
+            priceClub: getters.extractPrice(item.price1, item.price1d1, item.price1d2),
+            priceBuy: getters.extractPrice(item.price2, item.price2d1, item.price2d2),
+            priceBuyback: getters.extractPrice(item.price3, item.price3d1, item.price3d2)
+          }
         }
       },
-      hints: {
-        weight: `
-          <p>Фактический вес изделия может отличаться от номинала в большую сторону с погрешностью 0,003-0,050 г.</p>
-          <p>Данные о ширине полотна и среднем весе изделия носят справочный характер и могут отличаться от заявленных у разных изделий и партий.</p>
-        `
+      extractPrice() {
+        const currency = { rub: '₽', usd: '$' };
+
+        return (price, diff, perc, curName = null) => {
+          diff = profitFormat(diff);
+          perc = profitFormat(perc);
+
+          if(curName) {
+            diff = diff + currency[curName];
+            price = price + currency[curName];
+            perc = perc + '%'
+          }
+
+          return { diff, value: price, diffPerc: perc };
+        }
+      },
+      cleanedPhone() {
+        return (str) => cleanPhone(str);
       }
     },
+    actions: {
+      jsonToBody(_c, obj) {
+        return jsonToBody(obj);
+      },
+    },
     modules: {
-      cart: require('./cart').default
+      auth: require('./auth').default,
+      profile: require('./profile').default,
+      cart: require('./cart').default,
+      catalog: require('./catalog').default,
+      quotes: require('./quotes').default,
+      points: require('./points.js').default,
+      orders: require('./orders.js').default,
+      push: require('./push.js').default,
+      hints: require('./hints.js').default,
+      loaders: require('./loaders.js').default,
     },
 
     // enable strict mode (adds overhead!)

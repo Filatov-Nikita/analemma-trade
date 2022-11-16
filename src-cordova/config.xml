@@ -50,6 +50,7 @@
     <allow-navigation href="about:*" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <platform name="android">
+        <preference name="android-compileSdkVersion" value="31" />
         <resource-file src="google-services.json" target="app/google-services.json" />
         <icon density="ldpi" src="res/android/ldpi.png" />
         <icon density="mdpi" src="res/android/mdpi.png" />

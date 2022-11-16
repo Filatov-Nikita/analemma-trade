@@ -1,11 +1,11 @@
 <template>
   <div class="card-secondary tw-pb-6 tw-px-4 tw-p-4">
     <div class="tw-flex">
-      <q-img class="tw-w-[60px] tw-h-[60px] tw-shrink-0 tw-mr-3 tw-rounded-[10px]" v-bind="{ src: '/gold.png' }" />
+      <q-img class="tw-w-[60px] tw-h-[60px] tw-shrink-0 tw-mr-3 tw-rounded-[10px]" fit="contain" :src="$imgSrc(item.img)" />
 
       <div class="tw-grow">
         <div class="tw-flex tw-items-start tw-mb-3">
-          <p class="tw-text-sm tw-font-light tw-mr-2">Сувенирный слиток золота 999°, 20г</p>
+          <p class="tw-text-sm tw-font-light tw-mr-2">{{ item.name }}</p>
           <q-space />
           <button
             :class="{ 'tw-opacity-0': cantRemove }"
@@ -20,22 +20,22 @@
         <div class=" tw-space-y-[7px]">
           <div class="tw-flex tw-items-center">
             <p class="tw-font-light tw-text-xs tw-mr-1">Клубная цена:</p>
-            <p class="tw-font-bold tw-text-primary tw-mr-1">14 750₽</p>
+            <p class="tw-font-bold tw-text-primary tw-mr-1">{{ $price(item.price1) }}</p>
             <ButtonHint class="tw-mr-2" v-slot="{ showed, onChange }">
               <DialogHint :visible="showed" @update:visible="onChange">
-                <div v-html="$store.state.hints.weight"></div>
+                <div v-html="$store.getters['hints/club']"></div>
               </DialogHint>
             </ButtonHint>
           </div>
 
           <div class="tw-flex tw-items-center">
             <p class="tw-font-light tw-text-xs tw-mr-1">Обычная цена:</p>
-            <p>14 750₽</p>
+            <p>{{ $price(item.price2) }}</p>
           </div>
 
-          <div class="tw-flex tw-items-center" v-if="prices?.buyback">
+          <div class="tw-flex tw-items-center" v-if="item?.price3">
             <p class="tw-font-light tw-text-xs tw-mr-1">Цена выкупа:</p>
-            <p class="tw-font-bold tw-text-positive">{{ prices.buyback }}</p>
+            <p class="tw-font-bold tw-text-positive">{{ $price(item?.price3) }}</p>
           </div>
 
           <div
@@ -48,7 +48,7 @@
               <button
                 class="tw-p-2"
                 :disabled="!canReduce || disabledActions"
-                @click="$store.dispatch('cart/reduceItem', id)"
+                @click="$emit('reduce')"
               >
                 <svg
                   class="tw-w-4 tw-h-4 tw-stroke-black"
@@ -59,8 +59,8 @@
               <span class=" tw-font-bold tw-text-lg">{{ count }}</span>
               <button
                 class="tw-p-2"
-                :disabled="disabledActions"
-                @click="$store.dispatch('cart/incItem', id)"
+                :disabled="!canInc || disabledActions"
+                @click="$emit('inc')"
               >
                 <svg class="tw-w-4 tw-h-4 tw-stroke-black">
                   <use xlink:href="/sprite.svg#append"></use>
@@ -82,8 +82,10 @@
 <script>
 export default {
   props: {
-    id: {},
-    count: {},
+    item: {
+      required: true,
+      type: Object
+    },
     cantRemove: {
       default: false,
       type: Boolean
@@ -92,17 +94,31 @@ export default {
       default: false,
       type: Boolean
     },
-    prices: {},
     disabledActions: {
       default: false,
       type: Boolean
+    },
+    max: {
+      default: Infinity,
+      type: Number
+    },
+    count: {
+      default: 0,
+      type: Number
     }
   },
+  emits: ['inc', 'reduce'],
   computed: {
     canReduce() {
       return this.count > 1;
-    }
-  }
+    },
+    canInc() {
+      return this.count < this.max;
+    },
+    id() {
+      return this.item.id
+    },
+  },
 }
 </script>
 

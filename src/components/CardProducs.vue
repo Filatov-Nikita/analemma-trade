@@ -5,28 +5,43 @@
     label="Инвестиционное золото"
   >
     <div class="tw-px-4 tw-divide-y tw-divide-[#EAEAEA]">
-      <ProductItem
-        src="/gold.png"
-        name="Сувенирный слиток золота 999°, 20г"
-        :priceClub="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-        :priceBuy="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-        :priceBuyback="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-      />
-      <ProductItem
-        src="/gold.png"
-        name="Сувенирный слиток золота 100, 20г"
-        :priceClub="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-        :priceBuy="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-        :priceBuyback="{ value: '14 750₽', diff: '-12,50', diffPerc: '-0,69%' }"
-      />
+      <q-skeleton v-if="is('fetching')" class="tw-w-full" height="150px" type="rect" />
+      <template v-else-if="items">
+        <ProductItem
+          v-for="item in items"
+          :key="item.id"
+          :id="item.id"
+          :src="$imgSrc(item.img, '/gold.png')"
+          :name="item.name"
+          v-bind="extractPriceTypes(item)"
+        />
+      </template>
     </div>
   </CardRoot>
 </template>
 
 <script>
 import CardRoot from 'components/CardRoot.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  async created() {
+    this.start('fetching');
+    this.items = await this.$store.dispatch('catalog/getCatalog', { id: 39 });
+    this.end('fetching');
+  },
+  data() {
+    return {
+      items: null
+    }
+  },
+  computed: {
+    ...mapGetters(['extractPriceTypes']),
+    ...mapGetters('loaders', ['is']),
+  },
+  methods: {
+    ...mapActions('loaders', ['start', 'end'])
+  },
   components: {
     CardRoot,
   },

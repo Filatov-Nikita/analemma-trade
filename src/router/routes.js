@@ -19,7 +19,7 @@ const routes = [
             path: 'show',
             component: () => import('src/pages/ProfileShowPage.vue'),
             name: 'profile.show',
-            meta: { bgColorClass: 'tw-bg-white' }
+            meta: { bgColorClass: 'tw-bg-white', auth: true }
           }
         ]
       },
@@ -34,22 +34,23 @@ const routes = [
       {
         path: '/push/settings',
         component: () => import('src/pages/PushSettingsPage.vue'),
-        meta: { bgColorClass: 'tw-bg-white' },
+        meta: { bgColorClass: 'tw-bg-white', auth: true },
         name: 'push.settings'
       },
 
       {
         path: '/products',
         component: () => import('src/pages/ProductsPage.vue'),
-        meta: { bgColorClass: 'tw-bg-white' },
+        // meta: { bgColorClass: 'tw-bg-white' },
         name: 'products'
       },
 
       {
         path: '/products/:id',
         component: () => import('src/pages/ProductsShowPage.vue'),
-        meta: { bgColorClass: 'tw-bg-white' },
-        name: 'products.show'
+        // meta: { bgColorClass: 'tw-bg-white' },
+        name: 'products.show',
+        props: true
       },
       {
         path: '/address/:id',
@@ -66,7 +67,11 @@ const routes = [
     component: () => import('layouts/GuestLayout.vue'),
     children: [
       { path: '', name: 'login', component: () => import('src/pages/LoginPage.vue') },
-      { path: '/confirm', name: 'confirm', component: () => import('src/pages/ConfirmPage.vue') },
+      {
+        path: '/confirm',
+        name: 'confirm',
+        component: () => import('src/pages/ConfirmPage.vue'),
+      },
     ]
   },
 

@@ -1,15 +1,15 @@
 <template>
-  <CartItem count="2" cantRemove hideActions :prices="{ buyback: '14 500₽' }">
+  <CartItem :item="item" cantRemove hideActions>
     <button
       class="tw-flex tw-items-center tw-w-full tw-py-2 tw-mt-3"
-      @click="showDetails = !showDetails"
+      @click="showedDetails = !showedDetails"
     >
-      <p class="tw-text-xs tw-text-[#828282]">Заказ №ххххххх от 12.05.2021</p>
+      <p class="tw-text-xs tw-text-[#828282]">Заказ №{{ item.order_id }} от {{ date }}</p>
       <q-space />
       <span>
         <svg
           class="tw-w-3 tw-h-3 tw-fill-[#A8A7AF]"
-          :class="[ showDetails ? '-tw-rotate-90' : 'tw-rotate-90' ]"
+          :class="[ showedDetails ? '-tw-rotate-90' : 'tw-rotate-90' ]"
         >
           <use xlink:href="/sprite.svg#arrow-right"></use>
         </svg>
@@ -17,23 +17,23 @@
     </button>
     <div
       class="tw-pt-2 tw-text-xs tw-text-[#828282] tw-space-y-3"
-      v-if="showDetails"
+      v-if="showedDetails"
     >
       <div>
-        <span>Количество:</span>
-        <span>1</span>
+        <span>Количество: </span>
+        <span>{{ count }}</span>
       </div>
       <div>
-        <span>Сумма:</span>
-        <span>14 650₽</span>
+        <span>Сумма: </span>
+        <span>{{ $price(item.summ) }}</span>
       </div>
       <div>
-        <span>Статус:</span>
-        <span class="tw-font-bold tw-text-primary">Получен</span>
+        <span>Статус: </span>
+        <span class="tw-font-bold tw-text-primary">{{ item.status }}</span>
       </div>
     </div>
-    <AppButton class="tw-mt-8" size="base--rounded" @click="sell = true">Продать</AppButton>
-    <DialogProductSell v-model:visible="sell"/>
+    <AppButton class="tw-mt-8" size="base--rounded" @click="sell">Продать</AppButton>
+    <DialogProductSell v-model:visible="showedSell" :item="item" />
   </CartItem>
 </template>
 
@@ -42,10 +42,30 @@ import CartItem from './CartItem.vue';
 import DialogProductSell from './DialogProductSell.vue';
 
 export default {
+  props: {
+    item: {
+      required: true,
+      type: Object
+    }
+  },
   data() {
     return {
-      showDetails: false,
-      sell: false
+      showedDetails: false,
+      showedSell: false
+    }
+  },
+  computed: {
+    count() {
+      return parseInt(this.item.kol);
+    },
+    date() {
+      const dt = new Date(this.item.order_date.date);
+      return `${dt.getDate()}.${dt.getMonth()}.${dt.getFullYear()}`
+    }
+  },
+  methods: {
+    sell() {
+      this.showedSell = true;
     }
   },
   components: {

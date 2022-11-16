@@ -26,6 +26,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'init',
       'push-init',
+      'registr-guards',
       'regist-yandex-map.js',
       'registr-components.js',
       'registr-validators'

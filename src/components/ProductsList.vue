@@ -1,32 +1,36 @@
 <template>
   <div>
-    <ProductItem
-      v-for="i in 3"
-      :key="i"
-      class="tw-border-b tw-border-b-[#EAEAEA]"
-      src="/gold.png"
-      name="Сувенирный слиток золота 999°, 20г"
-      :priceClub="{
-        value: '14 750₽',
-        diff: '-12,50',
-        diffPerc: '-0,69%',
-      }"
-      :priceBuy="{
-        value: '14 750₽',
-        diff: '-12,50',
-        diffPerc: '-0,69%',
-      }"
-      :priceBuyback="{
-        value: '14 750₽',
-        diff: '-12,50',
-        diffPerc: '-0,69%',
-      }"
-    />
+    <p class="tw-py-4 tw-text-center" v-if="items.length <= 0">Товара нет в наличии</p>
+    <template v-else>
+      <ProductItem
+        class="tw-border-b tw-border-b-[#EAEAEA]"
+        v-for="item in items"
+        :key="item.id"
+        v-bind="{
+          id: item.id,
+          name: item.name,
+          src: $imgSrc(item.img, '/gold.png'),
+          ...extractPriceTypes(item)
+        }"
+      />
+  </template>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex';
+
+export default {
+  props: {
+    items: {
+      required: true,
+      type: Array
+    }
+  },
+  computed: {
+    ...mapGetters(['extractPriceTypes'])
+  }
+};
 </script>
 
 <style>

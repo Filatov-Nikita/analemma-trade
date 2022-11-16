@@ -1,12 +1,13 @@
 <template>
   <q-page class="page-py">
     <div class="wrapper">
-      <Toolbar class="tw-mb-5" title="Сувенирный слиток" titleClass="tw-pl-9 tw-text-base tw-font-bold">
+      <q-skeleton v-if="is('get product')" class="tw-w-full tw-mt-4" type="rect" height="60px" />
+      <Toolbar v-else-if="item" class="tw-mb-5" :title="item.name" titleClass="tw-pl-9 tw-text-base tw-font-bold">
         <template #actions>
           <div class="tw-flex">
             <ButtonHint class="tw-mr-2" v-slot="{ showed, onChange }">
               <DialogHint :visible="showed" @update:visible="onChange">
-                <div v-html="$store.state.hints.weight"></div>
+                <div v-html="$store.getters['hints/productCard']"></div>
               </DialogHint>
             </ButtonHint>
             <button @click="$store.commit('cart/toggle')">
@@ -18,23 +19,35 @@
         </template>
       </Toolbar>
 
-      <Carousel
-        class="tw-rounded-[20px]"
-        v-model="slide"
-        height="360px"
-      >
-        <CarouselSlide class="tw-p-0" name="1">
-          <q-img src="/gold2.png" class="tw-w-full" height="320px"/>
-        </CarouselSlide>
-        <CarouselSlide name="2">
-          <q-img src="/gold.png" class="tw-w-full" height="320px"/>
-        </CarouselSlide>
-      </Carousel>
+      <q-skeleton v-if="is('get product')" class="tw-w-full tw-mt-8" type="rect" height="500px" />
+      <template v-else-if="item">
+        <Carousel
+          class="tw-rounded-[20px] tw-mb-4"
+          v-model="slide"
+          height="400px"
+        >
+          <CarouselSlide
+            class="tw-p-0"
+            :name="index"
+            v-for="(src, index) in gallery"
+            :key="src"
+          >
+            <q-img
+              class="tw-w-full tw-h-full"
+              fit="contain"
+              :src="src"
+            />
+          </CarouselSlide>
+        </Carousel>
 
-      <ProductsOptions class="tw-mb-8" />
-      <ProductPrice class="tw-mb-8" />
-      <ProductPriceHistory />
-      <AppButton class="tw-mt-7" size="base--rounded" @click="order">Купить</AppButton>
+        <ProductsOptions class="tw-mb-8" v-bind="options" />
+        <ProductPrice
+          class="tw-mb-8"
+          v-bind="extractPriceTypes(item)"
+        />
+        <ProductPriceHistory :points="item.prop6" />
+        <AppButton class="tw-mt-7" size="base--rounded" @click="order">Купить</AppButton>
+      </template>
     </div>
   </q-page>
 </template>
@@ -43,16 +56,45 @@
 import ProductsOptions from 'components/ProductsOptions.vue';
 import ProductPrice from 'components/ProductPrice.vue';
 import ProductPriceHistory from 'components/ProductPriceHistory.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      slide: '1',
+  props: {
+    id: {
+      required: true,
+      type: [String, Number]
     }
   },
+  async created() {
+    this.start('get product');
+    this.item = await this.$store.dispatch('catalog/getOne', { id: this.id });
+    this.end('get product');
+  },
+  data() {
+    return {
+      slide: 0,
+      item: null
+    }
+  },
+  computed: {
+    ...mapGetters(['extractPriceTypes']),
+    ...mapGetters('loaders', ['is']),
+    options() {
+      if(!this.item) return null;
+      const { prop1, prop2, prop3, prop4, prop5 } = this.item;
+      return { prop1, prop2, prop3, prop4, prop5 };
+    },
+    gallery() {
+       if(!this.item) return null;
+       const gl = this.item.gallery;
+       const gallery = (gl && gl.length > 0) ? gl : [ this.item.img ];
+       return gallery.map(img => this.$imgSrc(img.slice(1)));
+    },
+  },
   methods: {
+    ...mapActions('loaders', ['start', 'end']),
     order() {
-      this.$store.dispatch('cart/add', { id: 1 });
+      this.$store.dispatch('cart/add', { id: this.item.id_tp });
       this.$store.commit('cart/toggle');
     }
   },

@@ -3,16 +3,18 @@
     <div class="wrapper">
       <Toolbar />
 
-      <CardUser class="tw-mb-4" />
+      <CardUser class="tw-mb-4" :user="user" />
 
       <div class="tw-text-center tw-mb-9">
-        <router-link class="link" :to="{ name: 'profile.show' }">Редактировать профиль</router-link>
+        <router-link v-if="isAuth" class="link" :to="{ name: 'profile.show' }">
+          Редактировать профиль
+        </router-link>
       </div>
 
       <MenuList class="tw-mb-4">
         <MenuListItem custom label="Мои заказы" icon="cart" @click="orders = true" />
         <MenuListItem label="Push уведомления" icon="alert" :to="{ name: 'push.settings' }" />
-        <MenuListItem custom label="Выход" icon="logout" @click="logout" />
+        <MenuListItem v-if="isAuth" custom label="Выход" icon="logout" @click="logout" />
       </MenuList>
 
       <MenuList class="tw-mb-4">
@@ -35,6 +37,7 @@ import CardHotline from 'components/CardHotline.vue';
 import CardUser from 'components/CardUser.vue';
 import DialogAddress from 'components/DialogAddress.vue';
 import DialgMyOrders from 'components/DialgMyOrders.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -43,10 +46,15 @@ export default {
       orders: false
     }
   },
+  computed: {
+    ...mapGetters('profile', ['user']),
+    ...mapGetters('auth', ['isAuth']),
+  },
   methods: {
-    logout() {
-      console.log('logout');
-      this.$router.replace({ name: 'login' })
+    async logout() {
+      await this.$store.dispatch('auth/logout');
+      await this.$router.replace({ name: 'login' });
+      window.location.reload();
     },
     showAddress() {
       this.address = true

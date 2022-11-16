@@ -5,37 +5,57 @@
         <div class="tw-flex">
           <p class="tw-mb-[2px] tw-mr-1">Клубная цена:</p>
           <ButtonHint v-slot="{ showed, onChange }">
-              <DialogHint :visible="showed" @update:visible="onChange">
-                <div v-html="$store.state.hints.weight"></div>
-              </DialogHint>
-            </ButtonHint>
+            <DialogHint :visible="showed" @update:visible="onChange">
+              <div v-html="$store.getters['hints/club']"></div>
+            </DialogHint>
+          </ButtonHint>
         </div>
-        <p class="tw-text-xs tw-font-light tw-text-gray900">04.07.2022</p>
+        <p class="tw-text-xs tw-font-light tw-text-gray900">{{ dt }}</p>
       </div>
       <q-space />
-      <QuotePrice value="150р" diff="-10" diffPerc="-0.68%" />
+      <QuotePrice v-bind="priceClub" />
     </div>
     <div class="tw-flex">
       <div>
         <p class="tw-mb-[2px]">Цена покупки:</p>
-        <p class="tw-text-xs tw-font-light tw-text-gray900">04.07.2022</p>
+        <p class="tw-text-xs tw-font-light tw-text-gray900">{{ dt }}</p>
       </div>
       <q-space />
-      <QuotePrice value="150р" diff="-10" diffPerc="-0.68%" />
+      <QuotePrice v-bind="priceBuy" />
     </div>
     <div class="tw-flex">
       <div>
         <p class="tw-mb-[2px]">Цена выкупа:</p>
-        <p class="tw-text-xs tw-font-light tw-text-gray900">04.07.2022</p>
+        <p class="tw-text-xs tw-font-light tw-text-gray900">{{ dt }}</p>
       </div>
       <q-space />
-      <QuotePrice value="150р" diff="-10" diffPerc="-0.68%" />
+      <QuotePrice v-bind="priceBuyback" />
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    priceClub: {
+      required: true,
+      type: Object
+    },
+    priceBuy: {
+      required: true,
+      type: Object
+    },
+    priceBuyback: {
+      required: true,
+      type: Object
+    }
+  },
+  data() {
+    return {
+      dt: this.$curDate()
+    }
+  }
+};
 </script>
 
 <style>

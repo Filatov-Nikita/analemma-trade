@@ -4,23 +4,44 @@
     :to="{ name: 'quotes' }"
     label="Котировки"
   >
-    <div class="card-secondary tw-px-5 tw-py-4 tw-flex tw-mb-3">
-      <QuoteLabel class="tw-mr-2" label="Золото 999" time="14:14:45" />
-      <q-space />
-      <QuotePrice value="1,795$" diff="-12,50" diffPerc="-0,69%" />
-    </div>
-    <div class="card-secondary tw-px-5 tw-py-4 tw-flex">
-      <QuoteLabel class="tw-mr-2" label="Серебро 999" time="14:14:45" />
-      <q-space />
-      <QuotePrice value="1,795$" diff="-12,50" diffPerc="-0,69%" />
-    </div>
+    <q-skeleton v-if="is('fetching q')" class="tw-w-full" height="150px" type="rect" />
+    <template v-else-if="items">
+      <div
+        class="card-secondary tw-px-5 tw-py-4 tw-flex tw-mb-3"
+        v-for="item in items"
+        :key="item.id"
+      >
+        <QuoteLabel class="tw-mr-2" :label="item.name" :time="item.date" />
+        <q-space />
+        <QuotePrice v-bind="extractPrice(item.price, item.dyn1, item.dyn2)" />
+      </div>
+    </template>
   </CardRoot>
 </template>
 
 <script>
 import CardRoot from 'components/CardRoot.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  async created() {
+    this.start('fetching q');
+    this.items = await this.getQuotes({ id: 41 });
+    this.end('fetching q');
+  },
+  data() {
+    return {
+      items: null
+    }
+  },
+  computed: {
+    ...mapGetters(['extractPrice']),
+    ...mapGetters('loaders', ['is']),
+  },
+  methods: {
+    ...mapActions('quotes', ['getQuotes']),
+    ...mapActions('loaders', ['start', 'end']),
+  },
   components: {
     CardRoot
   }

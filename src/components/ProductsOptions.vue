@@ -3,33 +3,80 @@
     <div class="option">
       <p>Проба</p>
       <q-space />
-      <p>999°</p>
+      <p>{{ getValue(prop1, 'deg') }}</p>
     </div>
     <div class="option">
       <p>Номинальный вес</p>
       <q-space />
-      <p>20г</p>
+      <p>{{ getValue(prop2, 'g') }}</p>
     </div>
     <div class="option">
       <p>Высота и ширина</p>
       <q-space />
-      <p>32мм х 18.6мм</p>
+      <p>{{ size }}</p>
     </div>
     <div class="option">
       <p>Толщина</p>
       <q-space />
-      <p>1,78</p>
+      <p>{{ getValue(prop2, 'mm') }}</p>
     </div>
     <div class="option">
       <p>Производитель</p>
       <q-space />
-      <p>“ОАО Красцветмет”</p>
+      <p v-html="prop5"></p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+const propType = {
+  deg: '°',
+  g: 'г',
+  mm: 'мм',
+}
+
+export default {
+  props: {
+    //проба
+    prop1: {
+      required: true,
+      type: String
+    },
+    // вес
+    prop2: {
+      required: true,
+      type: String
+    },
+    // размеры
+    prop3: {
+      required: true,
+      type: String
+    },
+    // толщина
+    prop4: {
+      required: true,
+      type: String
+    },
+    // производитель
+    prop5: {
+      required: true,
+      type: String
+    },
+  },
+  methods: {
+    getValue(val, propKey = null) {
+      if(!propKey) return val;
+      return val + propType[propKey];
+    }
+  },
+  computed: {
+    size() {
+      const v = this.getValue;
+      const [weight, height] = this.prop3.split('*');
+      return `${v(weight, 'mm')} x ${v(weight, 'mm')}`
+    }
+  }
+};
 </script>
 
 <style scoped>

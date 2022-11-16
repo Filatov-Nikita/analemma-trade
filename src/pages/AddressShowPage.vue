@@ -1,18 +1,18 @@
 <template>
-  <q-page>
+  <q-page v-if="point">
     <div class="wrapper">
       <Toolbar class="tw-relative tw-z-50" />
       <yandex-map
         class="tw-absolute tw-inset-0 tw-z-0"
+        zoom="16"
         :controls="[]"
-        :coords="$store.state.address[id]?.coords"
-        zoom="12"
+        :coords="point.geo"
         @map-was-initialized="init"
       >
         <ymap-marker
           :icon="$yMarker"
           :marker-id="id"
-          :coords="$store.state.address[id]?.coords"
+          :coords="point.geo"
         />
       </yandex-map>
     </div>
@@ -20,7 +20,7 @@
       <div class="tw-mb-10 tw-px-4">
         <div class="card-primary tw-bg-white tw-p-[6px]">
           <div class="card-secondary tw-p-4 tw-mb-2">
-            {{ $store.state.address[id]?.name }}
+            {{ point.address }}
           </div>
           <AppButton size="xl" @click="onClick">Проложить маршрут</AppButton>
         </div>
@@ -31,6 +31,7 @@
 
 <script>
 import { loadYmap } from 'vue-yandex-maps'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -39,12 +40,24 @@ export default {
       type: [String, Number]
     }
   },
+  async created() {
+    this.items ?? await this.list();
+  },
   setup() {
     return {
       map: null,
     }
   },
+  computed: {
+    ...mapGetters('points', ['items']),
+    point() {
+      if(!this.items) return null;
+      const point = this.items.filter((item) => +item.id === +this.id);
+      return point[0] || null;
+    }
+  },
   methods: {
+    ...mapActions('points', ['list']),
     async init(map) {
       this.map = map;
     },
@@ -66,7 +79,7 @@ export default {
       const multiRoute = new ymaps.multiRouter.MultiRoute({
           referencePoints: [
               await this.getMyLocation(),
-              this.$store.state.address[this.id]?.name
+              this.point.address
           ],
       }, {
          boundsAutoApply: true

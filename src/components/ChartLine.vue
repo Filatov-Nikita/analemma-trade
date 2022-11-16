@@ -27,6 +27,14 @@ export default defineComponent({
     Line
   },
   props: {
+    values: {
+      required: true,
+      type: Array
+    },
+    periods: {
+      required: true,
+      type: Array
+    },
     chartId: {
       type: String,
       default: 'line-chart'
@@ -54,13 +62,13 @@ export default defineComponent({
   },
   setup(props) {
     const chartData = {
-      labels: ['09.01.2022', '16.01.2022', '23.01.2022', '30.01.2022'],
+      labels: props.periods,
       datasets: [
         {
           cubicInterpolationMode: 'monotone',
           label: 'Цена',
           backgroundColor: '#f87979',
-          data: [5410, 15410, 16410, 15610],
+          data: props.values,
           borderColor: '#CBB04F',
           borderWidth: 2,
           pointBackgroundColor: '#CBB04F',
@@ -125,7 +133,7 @@ export default defineComponent({
             plugins: props.plugins
           }),
           h('div', { class: 'tw-flex tw-justify-between tw-mt-3 tw-mb-4 tw-text-[#757575]' },
-            [ h('p', '09.01.2022'), h('p', '30.01.2022') ]
+            [ h('p', props.periods[0]), h('p', props.periods[props.periods.length - 1]) ]
           )
         ]
       )

@@ -12,6 +12,7 @@
         :icon="$yMarker"
         :marker-id="item.id"
         :coords="item.coords"
+        :balloon-template="item.street"
         @click="selectPoint(item)"
       />
     </yandex-map>
@@ -31,7 +32,10 @@
 <script>
 export default {
   props: {
-    items: {}
+    items: {
+      required: true,
+      type: Array
+    }
   },
   data() {
     return {

@@ -15,7 +15,7 @@
     </div>
 
     <template v-if="show">
-     <ChartLine ref="chart" />
+     <ChartLine ref="chart" v-bind="{ values, periods }" />
 
       <div class="tw-text-center">
         <button
@@ -36,10 +36,24 @@ import ChartLine from './ChartLine.vue';
 import { nextTick } from 'vue';
 
 export default {
+  props: {
+    points: {
+      required: true,
+      type: Array
+    }
+  },
   data() {
     return {
       show: false,
     };
+  },
+  computed: {
+    values() {
+      return this.points.map(point => +point.match(/[0-9]+$/g)[0]);
+    },
+    periods() {
+      return this.points.map(point => point.match(/^\d{2}\.\d{2}/g)[0])
+    }
   },
   methods: {
     onClick() {

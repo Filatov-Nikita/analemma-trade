@@ -28,8 +28,6 @@ export default defineComponent({
   },
   methods: {
     onSuccess() {
-      this.$store.commit('cart/toggle', false);
-      this.$store.dispatch('cart/clear');
       this.$refs.success.show();
     }
   },

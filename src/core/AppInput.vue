@@ -9,8 +9,8 @@
     </label>
 
     <input
-      v-maska="cellphone ? '8 (###) ### ## ##' : ''"
-      v-bind="{ placeholder: $attrs.placeholder }"
+      v-maska="cellphone ? '8 (###) ### ## ##' : mask ?? ''"
+      v-bind="{ placeholder: $attrs.placeholder, autocomplete: $attrs.autocomplete }"
       :id="name"
       class="tw-block tw-w-full tw-h-[47px] tw-px-4 tw-text-sm tw-font-medium tw-border-b tw-border-[#C5C6C6]"
       :class="[
@@ -19,6 +19,7 @@
         : 'tw-bg-white tw-bg-opacity-0'
       ]"
       type="text"
+      :readonly="readonly"
       v-model="value"
     />
 
@@ -38,10 +39,18 @@ export default {
       default: false,
       type: Boolean
     },
+    readonly: {
+      default: false,
+      type: Boolean
+    },
     labelClass: {
       default: '',
       type: String
-    }
+    },
+    mask: {
+      default: undefined,
+      type: String
+    },
   },
   directives: { maska },
   setup(props) {

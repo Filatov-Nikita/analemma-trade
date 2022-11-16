@@ -1,6 +1,6 @@
 <template>
   <Field
-    v-if="deliveryType?.value === '1'"
+    v-if="deliveryType?.value === '2'"
     name="point"
     label="Пункт выдачи"
     rules="required"
@@ -17,7 +17,7 @@
   </Field>
 
   <div
-    v-else-if="deliveryType?.value === '2'"
+    v-else-if="deliveryType?.value === '3'"
     class="card-secondary tw-pb-6 tw-px-5 tw-pt-4"
   >
     <AppInput
