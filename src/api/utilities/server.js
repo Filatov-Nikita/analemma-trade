@@ -39,11 +39,10 @@ export default class ServiceApi {
             }
 
             let body;
-
-            if(!request.body) {
-              body = new FormData();
-            } else {
+            try {
               body = await request.formData();
+            } catch(e) {
+              body = new FormData();
             }
             body.append('token', token);
             request.headers.delete('Content-Type');
@@ -81,7 +80,7 @@ export default class ServiceApi {
       requestMode: request.requestMode,
       requestCredentials: request.requestCredentials,
       signal: request.signal, cache: request.cache,
-      body: opts.body, method: request. method,
+      body: opts.body, method: request.method,
       ...opts
     })
   }

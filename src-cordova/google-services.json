@@ -1,40 +1,113 @@
 {
   "project_info": {
-    "project_number": "111727138792",
-    "project_id": "analemma-30563",
-    "storage_bucket": "analemma-30563.appspot.com"
+    "project_number": "1049863791904",
+    "firebase_url": "https://lombard888-a9a82.firebaseio.com",
+    "project_id": "lombard888-a9a82",
+    "storage_bucket": "lombard888-a9a82.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:111727138792:android:fa9c4f26bd0b71f52e765d",
+        "mobilesdk_app_id": "1:1049863791904:android:6a858c7f81cefc47552345",
         "android_client_info": {
-          "package_name": "ru.analemma.gold"
+          "package_name": "com.bankir.lmbrd888"
         }
       },
       "oauth_client": [
         {
-          "client_id": "111727138792-ockjcqeqtt407qtcag7pt018kcdck41a.apps.googleusercontent.com",
+          "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBtUmU7yv17l3WNaYw9kdNG_YzfSN2mFs"
+          "current_key": "AIzaSyBgiSylWyTpuNodXNhdXg7qq8JnzZBUE9E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "111727138792-ockjcqeqtt407qtcag7pt018kcdck41a.apps.googleusercontent.com",
+              "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "111727138792-kcqhp785g1i7l3bpli1kvekllcpe7ig7.apps.googleusercontent.com",
+              "client_id": "1049863791904-6bjed2g0sg364qmljh8hdnh2bvqfr4q0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "ru.analemma.gold"
+                "bundle_id": "com.lombard888.lombard888"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049863791904:android:bc4d3ab8f4a44bcc552345",
+        "android_client_info": {
+          "package_name": "com.bankir.lombard888"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgiSylWyTpuNodXNhdXg7qq8JnzZBUE9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1049863791904-6bjed2g0sg364qmljh8hdnh2bvqfr4q0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lombard888.lombard888"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049863791904:android:2aef329a67c3991c552345",
+        "android_client_info": {
+          "package_name": "ru.analemma.gold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgiSylWyTpuNodXNhdXg7qq8JnzZBUE9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049863791904-4tirq8pfvvc7qnsi0qulfpe7jlefk48e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1049863791904-6bjed2g0sg364qmljh8hdnh2bvqfr4q0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lombard888.lombard888"
               }
             }
           ]

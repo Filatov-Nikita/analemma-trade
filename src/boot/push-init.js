@@ -1,20 +1,7 @@
-import { Notify } from 'quasar';
-import { registr } from 'src/api/fcm';
+import { Notify, Platform } from 'quasar';
+import { update } from 'src/api/fcm';
 
 export default async () => {
-  async function update() {
-    try {
-      const token = await cordova.plugins.firebase.messaging.getToken();
-      await registr({ token });
-      window.localStorage.setItem('pushToken', token);
-      debugger;
-      console.log(token);
-    } catch {
-      window.localStorage.removeItem('pushToken');
-      console.error('Не удалось обновить токен');
-    }
-  }
-
   document.addEventListener('deviceready', async () => {
     cordova.plugins.firebase.messaging.requestPermission({ forceShow: false }).then(function() {
       console.log("Push messaging is allowed");
@@ -31,10 +18,17 @@ export default async () => {
 
     cordova.plugins.firebase.messaging.onMessage(function(payload) {
       console.log("New foreground FCM message: ", payload);
-      const { title, body } = payload.aps.alert;
+
+      let msg = {};
+      if(Platform.is.ios) {
+        msg = payload?.aps?.alert || {};
+      } else if (Platform.is.android) {
+        msg = payload?.gcm || {};
+      }
+
       Notify.create({
         type: 'positive',
-        message: `${title}: ${body}`
+        message: `${msg?.title}: ${msg?.body}`
       });
     });
 

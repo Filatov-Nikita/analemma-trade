@@ -46,8 +46,13 @@ export default {
           'auth/getToken',
           { kod, phone: this.$store.getters.cleanedPhone(this.phone) }
         );
+
         this.$router.back();
       } catch(e) {
+        if(e?.invalidCode) return this.$q.notify({
+          type: 'negative',
+          message: 'Неверно введен код',
+        });
         if(!e.response) throw e;
       } finally {
         this.end('get token');

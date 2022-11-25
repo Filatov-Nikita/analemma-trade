@@ -10,8 +10,8 @@
       >
         <a
           class="tw-text-center tw-px-2"
-          :href="href"
-          @click="navigate"
+          :href="link.icon === 'cart' ? link.to : href"
+          @click="link.icon === 'cart' ? null : navigate"
         >
           <svg :class="[ isExactActive ? 'tw-fill-primary' : 'tw-fill-[#D5D5D5]', 'tw-w-5 tw-h-5 tw-mx-auto', 'tw-mb-1' ]">
             <use :xlink:href="`/sprite.svg#${link.icon}`"></use>
@@ -42,7 +42,7 @@ const navLinks = [
   },
   {
     icon: 'cart',
-    to: '/3',
+    to: 'https://analemmatrade.ru/catalog/',
     label: 'Витрина'
   },
 ]

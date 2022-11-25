@@ -34,7 +34,7 @@ const routes = [
       {
         path: '/push/settings',
         component: () => import('src/pages/PushSettingsPage.vue'),
-        meta: { bgColorClass: 'tw-bg-white', auth: true },
+        meta: { bgColorClass: 'tw-bg-white' },
         name: 'push.settings'
       },
 

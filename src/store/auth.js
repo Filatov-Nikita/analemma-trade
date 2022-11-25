@@ -1,5 +1,6 @@
 import * as Tokens from 'src/api/utilities/tokens';
 import * as AuthAPI  from 'src/api/auth';
+import { update } from 'src/api/fcm';
 
 export default {
   namespaced: true,
@@ -20,10 +21,16 @@ export default {
         { phone, kod },
         { root: true }
       );
-      const { token } = await AuthAPI.getToken(body);
-      Tokens.setTokensData(token);
+      const res = await AuthAPI.getToken(body);
+      if(!res.token) {
+        const err = new Error('invalid code');
+        err.invalidCode = true;
+        throw err;
+      }
+      Tokens.setTokensData(res.token);
       await dispatch('profile/show', null, { root: true });
-      return token;
+      await update();
+      return res.token;
     },
     async logout({ commit }) {
       Tokens.cleanTokensData();
