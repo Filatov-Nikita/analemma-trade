@@ -16,8 +16,8 @@ export default store(function (/* { ssrContext } */) {
       extractPriceTypes(_state, getters) {
         return (item) => {
           return {
-            priceClub: getters.extractPrice(item.price1, item.price1d1, item.price1d2),
-            priceBuy: getters.extractPrice(item.price2, item.price2d1, item.price2d2),
+            priceClub: getters.extractPrice(item.price2, item.price2d1, item.price2d2),
+            priceBuy: getters.extractPrice(item.price1, item.price1d1, item.price1d2),
             priceBuyback: getters.extractPrice(item.price3, item.price3d1, item.price3d2)
           }
         }

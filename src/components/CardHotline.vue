@@ -5,6 +5,7 @@
     <a
       href="tel:84952564947"
       class="card-secondary tw-mx-2 tw-p-5 tw-flex tw-items-center"
+      @click="open"
     >
       <span class="tw-mr-2">
         <svg class="tw-w-5 tw-h-5">
@@ -17,7 +18,16 @@
 </template>
 
 <script>
-export default {};
+import { Platform } from 'quasar';
+
+export default {
+  methods: {
+    open() {
+      if(!Platform.is.cordova) return;
+      cordova.InAppBrowser.open('tel:+74952564947', '_system');
+    }
+  }
+};
 </script>
 
 <style>

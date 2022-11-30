@@ -20,7 +20,7 @@
         <div class=" tw-space-y-[7px]">
           <div class="tw-flex tw-items-center">
             <p class="tw-font-light tw-text-xs tw-mr-1">Клубная цена:</p>
-            <p class="tw-font-bold tw-text-primary tw-mr-1">{{ $price(item.price1) }}</p>
+            <p class="tw-font-bold tw-text-primary tw-mr-1">{{ $price(item.price2) }}</p>
             <ButtonHint class="tw-mr-2" v-slot="{ showed, onChange }">
               <DialogHint :visible="showed" @update:visible="onChange">
                 <div v-html="$store.getters['hints/club']"></div>
@@ -30,12 +30,12 @@
 
           <div class="tw-flex tw-items-center">
             <p class="tw-font-light tw-text-xs tw-mr-1">Обычная цена:</p>
-            <p>{{ $price(item.price2) }}</p>
+            <p>{{ $price(item.price1) }}</p>
           </div>
 
           <div class="tw-flex tw-items-center" v-if="item?.price3">
             <p class="tw-font-light tw-text-xs tw-mr-1">Цена выкупа:</p>
-            <p class="tw-font-bold tw-text-positive">{{ $price(item?.price3) }}</p>
+            <p class="tw-font-bold tw-text-positive">{{ $price(item.price3) }}</p>
           </div>
 
           <div

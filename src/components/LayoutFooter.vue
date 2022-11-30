@@ -10,8 +10,8 @@
       >
         <a
           class="tw-text-center tw-px-2"
-          :href="link.icon === 'cart' ? link.to : href"
-          @click="link.icon === 'cart' ? null : navigate"
+          :href="href"
+          @click="navigate"
         >
           <svg :class="[ isExactActive ? 'tw-fill-primary' : 'tw-fill-[#D5D5D5]', 'tw-w-5 tw-h-5 tw-mx-auto', 'tw-mb-1' ]">
             <use :xlink:href="`/sprite.svg#${link.icon}`"></use>
@@ -19,11 +19,22 @@
           <span :class="[ isExactActive ? 'tw-text-primary' : 'tw-text-gray900' ]">{{ link.label }}</span>
         </a>
       </router-link>
+      <button type="button"
+          class="tw-text-center tw-px-2"
+          @click="open(cart.to)"
+        >
+          <svg :class="'tw-w-5 tw-h-5 tw-mx-auto tw-mb-1 tw-fill-[#D5D5D5]'">
+            <use :xlink:href="`/sprite.svg#cart`"></use>
+          </svg>
+          <span :class="'tw-text-gray900'">{{ cart.label }}</span>
+        </button>
     </nav>
   </q-footer>
 </template>
 
 <script>
+import { Platform } from 'quasar';
+
 const navLinks = [
   {
     icon: 'home',
@@ -40,20 +51,25 @@ const navLinks = [
     to: '/quotes',
     label: 'Котировки'
   },
-  {
-    icon: 'cart',
-    to: 'https://analemmatrade.ru/catalog/',
-    label: 'Витрина'
-  },
 ]
 
 export default {
   data() {
     return {
       navLinks,
-
+      cart: {
+        icon: 'cart',
+        to: 'https://analemmatrade.ru/catalog/',
+        label: 'Витрина'
+      },
     }
   },
+  methods: {
+    open(href) {
+      if(!Platform.is.cordova) return;
+      cordova.InAppBrowser.open(href, '_blank', 'location=yes');
+    }
+  }
 }
 </script>
 
