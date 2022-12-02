@@ -27,7 +27,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   async created() {
     this.start('fetching');
-    this.items = await this.$store.dispatch('catalog/getCatalog', { id: 39 });
+    this.items = await this.$store.dispatch('catalog/getCatalog', { id: 40 });
     this.end('fetching');
   },
   data() {

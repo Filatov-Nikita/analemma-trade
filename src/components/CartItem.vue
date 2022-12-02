@@ -1,7 +1,7 @@
 <template>
   <div class="card-secondary tw-pb-6 tw-px-4 tw-p-4">
     <div class="tw-flex">
-      <q-img class="tw-w-[60px] tw-h-[60px] tw-shrink-0 tw-mr-3 tw-rounded-[10px]" fit="contain" :src="$imgSrc(item.img)" />
+      <q-img class="tw-w-[60px] tw-h-[60px] tw-shrink-0 tw-mr-3 tw-rounded-[10px]" fit="contain" :src="$imgSrc(item.img, '/gold.png')" />
 
       <div class="tw-grow">
         <div class="tw-flex tw-items-start tw-mb-3">

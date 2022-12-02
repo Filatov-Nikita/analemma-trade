@@ -4,7 +4,7 @@
       class="tw-absolute tw-inset-0 tw-z-0"
       :controls="[]"
       :coords="items[0].coords"
-      zoom="10"
+      zoom="15"
     >
       <ymap-marker
         v-for="item in items"

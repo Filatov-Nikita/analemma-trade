@@ -65,12 +65,13 @@ export default {
   },
   methods: {
     getValue(val, propKey = null) {
-      if(!propKey) return val;
+      if(!propKey || val === '-') return val;
       return val + propType[propKey];
     }
   },
   computed: {
     size() {
+      if(this.prop3 === '-') return this.prop3;
       const v = this.getValue;
       const [weight, height] = this.prop3.split('*');
       return `${v(weight, 'mm')} x ${v(weight, 'mm')}`

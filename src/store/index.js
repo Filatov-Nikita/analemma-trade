@@ -25,17 +25,41 @@ export default store(function (/* { ssrContext } */) {
       extractPrice() {
         const currency = { rub: '₽', usd: '$' };
 
-        return (price, diff, perc, curName = null) => {
-          diff = profitFormat(diff);
-          perc = profitFormat(perc);
+        const formatter = {
+          diff: (diff, curName = null) => {
+            if(diff !== null && diff !== '-') {
+              diff = profitFormat(diff)
+              if(curName) diff = diff + currency[curName];
+              return diff;
+            }
 
-          if(curName) {
-            diff = diff + currency[curName];
-            price = price + currency[curName];
-            perc = perc + '%'
+            return '-';
+          },
+          perc: (perc, curName = null) => {
+            if(perc !== null && perc !== '-') {
+              perc = profitFormat(perc)
+              if(curName) perc = perc + '%';
+              return perc;
+            }
+
+            return '-';
+          },
+          price: (price, curName = null) => {
+            if(price !== null && price !== '-') {
+              if(curName) price = price + currency[curName];
+              return price;
+            }
+
+            return '-'
           }
+        }
 
-          return { diff, value: price, diffPerc: perc };
+        return (price, diff, perc, curName = null) => {
+          return {
+            diff: formatter['diff'](diff, curName),
+            value: formatter['price'](price, curName),
+            diffPerc: formatter['perc'](perc, curName)
+          };
         }
       },
       cleanedPhone() {

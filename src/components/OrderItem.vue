@@ -25,14 +25,24 @@
       </div>
       <div>
         <span>Сумма: </span>
-        <span>{{ $price(item.summ) }}</span>
+        <span>{{ $price(sum) }}</span>
       </div>
       <div>
         <span>Статус: </span>
         <span class="tw-font-bold tw-text-primary">{{ item.status }}</span>
       </div>
     </div>
-    <AppButton class="tw-mt-8" size="base--rounded" @click="sell">Продать</AppButton>
+    <AppButton
+      v-if="item.payment_url"
+      class="tw-mt-8"
+      size="base--rounded"
+      @click="$store.dispatch('orders/pay', { paymentUrl: item.payment_url })"
+    >
+      Оплатить
+    </AppButton>
+    <AppButton v-else-if="item.status_code === 'F'" class="tw-mt-8" size="base--rounded" @click="sell">
+      Продать
+    </AppButton>
     <DialogProductSell v-model:visible="showedSell" :item="item" />
   </CartItem>
 </template>
@@ -40,7 +50,6 @@
 <script>
 import CartItem from './CartItem.vue';
 import DialogProductSell from './DialogProductSell.vue';
-
 export default {
   props: {
     item: {
@@ -58,15 +67,21 @@ export default {
     count() {
       return parseInt(this.item.kol);
     },
+    sum() {
+      return parseFloat(this.item.summ).toFixed(2);
+    },
     date() {
-      const dt = new Date(this.item.order_date.date);
-      return `${dt.getDate()}.${dt.getMonth()}.${dt.getFullYear()}`
+      const [date] = this.item.order_date.date.split(' ');
+      const dt = new Date(date);
+      let day = dt.getDate();
+      day = day < 10 ? `0${day}` : day;
+      return `${day}.${dt.getMonth()}.${dt.getFullYear()}`
     }
   },
   methods: {
     sell() {
       this.showedSell = true;
-    }
+    },
   },
   components: {
     CartItem,

@@ -25,6 +25,11 @@ export default {
   actions: {
     async show({ commit }) {
       const data = await ProfileAPI.show();
+
+      if(data.email.indexOf('@analemmatrade.ru') !== -1) {
+        data.email = '';
+      }
+
       commit('setUser', data);
       return data;
     },

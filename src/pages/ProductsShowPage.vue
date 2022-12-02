@@ -45,7 +45,7 @@
           class="tw-mb-8"
           v-bind="extractPriceTypes(item)"
         />
-        <ProductPriceHistory :points="item.prop6" />
+        <ProductPriceHistory v-if="item.prop6" :points="item.prop6" />
         <AppButton class="tw-mt-7" size="base--rounded" @click="order">Купить</AppButton>
       </template>
     </div>
@@ -81,14 +81,25 @@ export default {
     ...mapGetters('loaders', ['is']),
     options() {
       if(!this.item) return null;
+
+      const format = (prop) => prop || '-';
       const { prop1, prop2, prop3, prop4, prop5 } = this.item;
-      return { prop1, prop2, prop3, prop4, prop5 };
+
+      return {
+        prop1: format(prop1),
+        prop2: format(prop2),
+        prop3: format(prop3),
+        prop4: format(prop4),
+        prop5: format(prop5)
+      };
     },
     gallery() {
        if(!this.item) return null;
        const gl = this.item.gallery;
        const gallery = (gl && gl.length > 0) ? gl : [ this.item.img ];
-       return gallery.map(img => this.$imgSrc(img.slice(1)));
+       return gallery.map(
+        img => img === null ? '/gold2.png' : this.$imgSrc(img.slice(1))
+      );
     },
   },
   methods: {

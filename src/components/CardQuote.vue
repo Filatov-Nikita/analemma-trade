@@ -26,7 +26,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   async created() {
     this.start('fetching q');
-    this.items = await this.getQuotes({ id: 41 });
+    this.items = await this.getQuotes({ id: 36 });
     this.end('fetching q');
   },
   data() {

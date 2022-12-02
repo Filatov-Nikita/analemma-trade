@@ -1,6 +1,6 @@
 export default ({ app }) => {
   app.config.globalProperties.$imgSrc = (src, defaultImg = null) => {
-    return src ? 'https://analemmatrade.nabiullin.com/' + src : defaultImg;
+    return src ? 'https://analemmatrade.ru/' + src : defaultImg;
   }
 
   app.config.globalProperties.$curDate = () => {
@@ -13,6 +13,7 @@ export default ({ app }) => {
   }
 
   app.config.globalProperties.$price = (val) => {
+    if(val === null) return '-';
     return val + '₽'
   }
 

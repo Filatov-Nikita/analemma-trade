@@ -1,6 +1,6 @@
 import Service from "src/api/utilities/server";
 
-const api = new Service("https://analemmatrade.nabiullin.com", {
+const api = new Service("https://analemmatrade.ru", {
   apiPath: "api",
   timeout: 10000,
 });
