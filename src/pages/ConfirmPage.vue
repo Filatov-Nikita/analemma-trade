@@ -47,7 +47,7 @@ export default {
           { kod, phone: this.$store.getters.cleanedPhone(this.phone) }
         );
 
-        this.$router.back();
+        this.$back();
       } catch(e) {
         if(e?.invalidCode) return this.$q.notify({
           type: 'negative',

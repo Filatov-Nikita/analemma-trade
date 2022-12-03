@@ -1,7 +1,7 @@
 <template>
   <q-page class="tw-relative">
     <div class="safe-pt tw-absolute tw-right-3 tw-top-0">
-      <button class="tw-block" @click="$router.back()">
+      <button class="tw-block" @click="$back">
         <svg class="tw-h-6 tw-w-6">
           <use xlink:href="/sprite.svg#close"></use>
         </svg>

@@ -1,4 +1,4 @@
-export default ({ app }) => {
+export default ({ app, router }) => {
   app.config.globalProperties.$imgSrc = (src, defaultImg = null) => {
     return src ? 'https://analemmatrade.ru/' + src : defaultImg;
   }
@@ -24,5 +24,11 @@ export default ({ app }) => {
     if(num > 1 && num < 5) return words[1];
     if(num === 1) return words[0];
     return words[2];
+  }
+
+  app.config.globalProperties.$back = () => {
+    const back = window.history.state.back;
+    if(back === null) router.replace({ path: '/' });
+    else router.back();
   }
 }

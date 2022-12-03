@@ -1,6 +1,6 @@
 <template>
   <div class="safe-pt tw-flex tw-items-center">
-    <button class="tw-p-2" @click="$router.back()">
+    <button class="tw-p-2" @click="$back">
       <span>
         <svg class="tw-rotate-180 tw-w-4 tw-h-4">
           <use xlink:href="/sprite.svg#arrow-right"></use>
