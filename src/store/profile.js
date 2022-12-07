@@ -33,11 +33,11 @@ export default {
       commit('setUser', data);
       return data;
     },
-    async update({ commit, getters, dispatch }, { body }) {
+    async update({ dispatch }, { body }) {
       const formdata = await dispatch('jsonToBody', body, { root: true });
       await ProfileAPI.update(formdata);
-      commit('setUser', { ...getters.user, ...body });
-      return getters.user;
+      const user = await dispatch('show');
+      return user;
     }
   }
 }
