@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1049863791904-ptd3p8b9aee9br827n200la88slh8nk4.apps.googleusercontent.com</string>
+	<string>246923099677-dftm7atpc9joc1sf193ib04k8m4j8cem.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1049863791904-ptd3p8b9aee9br827n200la88slh8nk4</string>
+	<string>com.googleusercontent.apps.246923099677-dftm7atpc9joc1sf193ib04k8m4j8cem</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>246923099677-3pqrnbq04nje8adbt064ou6c3n5uppv2.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAF3Q4rjJ4gnqh3FOCzJ7wLZVes1yayrbM</string>
+	<string>AIzaSyBe5RmaJBSZFbWo5XEDgxkJ7tsxaaFqLRo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1049863791904</string>
+	<string>246923099677</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>ru.analemma.gold</string>
 	<key>PROJECT_ID</key>
-	<string>lombard888-a9a82</string>
+	<string>analemma-ba09c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>lombard888-a9a82.appspot.com</string>
+	<string>analemma-ba09c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1049863791904:ios:959553246f1414a2552345</string>
-	<key>DATABASE_URL</key>
-	<string>https://lombard888-a9a82.firebaseio.com</string>
+	<string>1:246923099677:ios:0d86fe03480308417290f4</string>
 </dict>
 </plist>
